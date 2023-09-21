@@ -17,9 +17,13 @@ __pycache__/
 # C extensions
 *.so
 
+Datasets/
+
 # Distribution / packaging
 .Python
 build/
+build_gtsam/
+build_ngp/
 develop-eggs/
 dist/
 downloads/
