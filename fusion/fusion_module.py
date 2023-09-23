@@ -4,6 +4,7 @@ class FusionModule(MIMOPipelineModule):
     def __init__(self, name, args, device="cpu") -> None:
         super().__init__(name, args.parallel_run, args)
         self.device = device
+        self.outpath = args.outpath
 
     def spin_once(self, data_packet):
         output = self.fusion.fuse(data_packet)
@@ -14,6 +15,10 @@ class FusionModule(MIMOPipelineModule):
         #if not output:
         #    super().shutdown_module()
         return output
+    
+    # TODO: implement so we can save nerf output
+    def save(self):
+        pass
 
     def initialize_module(self):
         self.set_cuda_device() # This needs to be done before importing NerfFusion or TsdfFusion

@@ -1,6 +1,7 @@
 imgui.ini
 *.npz
 *.svg
+*.npy
 
 # Meshes
 *.pcd

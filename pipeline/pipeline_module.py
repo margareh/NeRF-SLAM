@@ -5,8 +5,9 @@ from icecream import ic
 #from torch.profiler import profile, ProfilerActivity
 
 class PipelineModuleBase:
-    def __init__(self, name, parallel_run, args=None, grad=False):
+    def __init__(self, name, parallel_run, args=None, grad=False, outpath=None):
         self.name = name
+        self.outpath = outpath
         self.parallel_run = parallel_run
         self.grad = grad # determines if we are tracing grads or not 
         self.shutdown = False # needs to be atomic
@@ -26,6 +27,10 @@ class PipelineModuleBase:
 
     @abstractmethod
     def spin(self) -> bool:
+        pass
+
+    @abstractmethod
+    def save(self):
         pass
 
     @abstractmethod
@@ -117,6 +122,8 @@ class PipelineModule(PipelineModuleBase):
                 self.is_thread_working = False;
                 return True;
 
+        log.info(f"Module: {self.name} - Saving data.")
+        self.save();
         self.is_thread_working = False;
         log.info(f"Module: {self.name} - Successful shutdown.")
         return False;

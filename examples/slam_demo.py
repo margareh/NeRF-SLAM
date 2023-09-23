@@ -20,6 +20,8 @@ import argparse
 def parse_args():
     parser = argparse.ArgumentParser(description="Instant-SLAM")
 
+    parser.add_argument('--outpath', type=str, help='Directory to save output in')
+
     # SLAM ARGS
     parser.add_argument("--parallel_run", action="store_true", help="Whether to run in parallel")
     parser.add_argument("--multi_gpu", action="store_true", help="Whether to run with multiple (two) GPUs")
